@@ -206,11 +206,20 @@ for test_ins in ins_list:
 
     # adjust per objective count
     if n_obj == 2:
-        n_pref_update = 5
-        nsga_generations_cap = 250
+        pop_size = 100
+        nsga_generations = 250
+    elif n_obj == 3:
+        pop_size = 105
+        nsga_generations = 380
+    elif n_obj == 4:
+        pop_size = 120
+        nsga_generations = 333
+    elif n_obj == 6:
+        pop_size = 182
+        nsga_generations = 246
     else:
-        n_pref_update = 8
-        nsga_generations_cap = 400
+        pop_size = 90
+        nsag_generations = 444
 
     # ref point for HV (evaluation) — normalized space uses [1.1]*m
     ref_point_eval = np.array([1.1] * n_obj)
@@ -273,8 +282,14 @@ for test_ins in ins_list:
         n_gen = res.algorithm.n_gen
         if n_obj == 2:
             n_steps = math.floor((25000 - n_gen * 100) / 25)
+        elif n_obj == 3:
+            n_steps = math.floor((40000 - n_gen * 105) / 40)
+        elif n_obj == 4:
+            n_steps = math.floor((40000 - n_gen * 120) / 40)
+        elif n_obj == 6:
+            n_steps = math.floor((40000 - n_gen * 182) / 40)
         else:
-            n_steps = math.floor((40000 - n_gen * 100) / 40)
+            n_steps = math.floor((40000 - n_gen * 90) / 40)
         print(n_gen, n_steps)
 
         pretrain_loader = DataLoader(PreTrainDataset(prefs_tensor, X_tensor), batch_size=64, shuffle=True)
@@ -488,3 +503,4 @@ for test_ins in ins_list:
 
     print(f"{test_ins} Δsmall HyperVolume：", small_Hyper)
     print(f"{test_ins} Δlarge HyperVolume：", large_Hyper)
+
