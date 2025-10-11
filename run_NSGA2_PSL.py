@@ -243,7 +243,7 @@ for test_ins in ins_list:
         res = minimize(
             problem_nsga,
             algorithm,
-            ("n_gen", nsga_generations_cap),   
+            ("n_gen", nsga_generations),   
             verbose=False,
             callback=early_cb
         )
@@ -503,4 +503,5 @@ for test_ins in ins_list:
 
     print(f"{test_ins} Δsmall HyperVolume：", small_Hyper)
     print(f"{test_ins} Δlarge HyperVolume：", large_Hyper)
+
 
